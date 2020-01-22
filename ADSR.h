@@ -48,15 +48,15 @@ private:
 
 	const unsigned int LERPS_PER_CONTROL;
 
-	unsigned int update_step_counter;
-	unsigned int num_update_steps;
+	unsigned long update_step_counter;
+	unsigned long num_update_steps;
 
 	enum {ATTACK,DECAY,SUSTAIN,RELEASE,IDLE};
 
 
 	struct phase{
 		byte phase_type;
-		unsigned int update_steps;
+		unsigned long update_steps;
 		long lerp_steps; // signed, to match params to transition (line) type Q15n16, below
 		Q8n0 level;
 	}attack,decay,sustain,release,idle;
@@ -68,8 +68,8 @@ private:
 	Line <Q15n16> transition; // scale up unsigned char levels for better accuracy, then scale down again for output
 
 	inline
-	unsigned int convertMsecToControlUpdateSteps(unsigned int msec){
-		return (uint16_t) (((uint32_t)msec*CONTROL_UPDATE_RATE)>>10); // approximate /1000 with shift
+	  unsigned long convertMsecToControlUpdateSteps(unsigned int msec){
+	  return (uint32_t) (((uint32_t)msec*CONTROL_UPDATE_RATE)>>10); // approximate /1000 with shift
 	}
 
 
