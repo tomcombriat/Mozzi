@@ -50,7 +50,6 @@ private:
 
 	T update_step_counter;
 	T num_update_steps;
-
 	enum {ATTACK,DECAY,SUSTAIN,RELEASE,IDLE};
 
 
