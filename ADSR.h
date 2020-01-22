@@ -68,13 +68,8 @@ private:
 	Line <Q15n16> transition; // scale up unsigned char levels for better accuracy, then scale down again for output
 
 	inline
-<<<<<<< HEAD
 	T convertMsecToControlUpdateSteps(unsigned int msec){
 		return (T) (((uint32_t)msec*CONTROL_UPDATE_RATE)>>10); // approximate /1000 with shift
-=======
-	  unsigned long convertMsecToControlUpdateSteps(unsigned int msec){
-	  return (uint32_t) (((uint32_t)msec*CONTROL_UPDATE_RATE)>>10); // approximate /1000 with shift
->>>>>>> Changes for TES 8k synths (STm32 based)
 	}
 
 

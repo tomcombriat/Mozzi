@@ -60,11 +60,14 @@ http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ .
 Mozzi-users list has a thread on this.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AUDIO_RATE AUDIO_RATE_PLATFORM_DEFAULT
 //#define AUDIO_RATE 16384 // default on AVR / classic Arduino
 //#define AUDIO_RATE 32768 // default on most other platforms
 //#define AUDIO_RATE 65536 // try on Teensy3/3.1 or other strong cpus
 =======
+=======
+>>>>>>> Changes for TES 8k synths (STm32 based)
 //#define AUDIO_RATE 16384
 #define AUDIO_RATE 32768
 //#define AUDIO_RATE 65536 // try on Teensy3/3.1
