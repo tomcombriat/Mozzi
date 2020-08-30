@@ -89,7 +89,7 @@ You need to have \#define STEREO_HACK true in mozzi_config.h
 */
 #define STEREO_HACK false
 
-//#define EXTERNAL_AUDIO_OUTPUT true
+#define EXTERNAL_AUDIO_OUTPUT false
 
 
 #endif        //  #ifndef MOZZI_CONFIG_H
