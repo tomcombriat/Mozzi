@@ -48,17 +48,17 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   }
 
 
-  /** Add all Oscil to a MetaOscil.
+  /** Set all Oscil of a MetaOscil.
       @param first... is a list of pointers towards several Oscil */ 
-  template<typename ... T >  void addOscils(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* first,T... elements)
+  template<typename ... T >  void setOscils(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* first,T... elements)
     {
       oscillators[current_rank]=first;
       current_rank+=1;
-      addOscils(elements...);
+      setOscils(elements...);
       current_rank = 0;
     }
 
-  void addOscils(){};
+  void setOscils(){};
 
   
   /** Set all the cutoff frequencies for changing between Oscil. They have to be sorted in increasing values and contain at least N_OSCIL-1 values. Note that the last Oscil will be used by default for frequencies higher than the higher cutoff, hence the last value can be discarded.
