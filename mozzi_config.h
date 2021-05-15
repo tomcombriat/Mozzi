@@ -101,6 +101,6 @@ For more detail, @see AudioOuput .
 /** @ingroup core
 Only used when EXTERNAL_AUDIO_OUTPUT is set to true: The resolution to use for audio samples, internally. You will usually set this to match the
 output resolution of your DAC. 16 is the default value, here. Note that 16 bits is also the maximum currently supported on AVR. */
-#define EXTERNAL_AUDIO_BITS 16
+#define EXTERNAL_AUDIO_BITS 24
 
 #endif        //  #ifndef MOZZI_CONFIG_H
