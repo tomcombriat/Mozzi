@@ -44,11 +44,11 @@ public:
    */
   LowPassFilterNbits() { ; }
 
-  /** deprecated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t
+  /** deprecated.  Use setCutoffFreqAndResonance(su cutoff, su
   resonance).
 
   Set the cut off frequency,
-  @param cutoff use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2).
+  @param cutoff use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2) for LowPassFilter, cutoff use the range 0-65535 to represent 0-AUDIO_RATE/2.
   Be careful of distortion at the lower end, especially with high resonance.
   */
   void setCutoffFreq(su cutoff)
@@ -57,12 +57,12 @@ public:
     fb = q + ucfxmul(q, SHIFTED_1 - cutoff);
   }
 
-  /** deprecated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t
+  /** deprecated.  Use setCutoffFreqAndResonance(su cutoff, su
   resonance).
 
   Set the resonance. If you hear unwanted distortion, back off the resonance.
   After setting resonance, you need to call setCuttoffFreq() to hear the change!
-  @param resonance in the range 0-255, with 255 being most resonant.
+  @param resonance in the range 0-255 for LowPassFilter, 0-65535 for LowPassFilter16, with 255/65535 being most resonant
   @note	Remember to call setCuttoffFreq() after resonance is changed!
   */
   void setResonance(su resonance) { q = resonance; }
@@ -70,9 +70,9 @@ public:
   /**
   Set the cut off frequency and resonance.  Replaces setCutoffFreq() and
   setResonance().  (Because the internal calculations need to be done whenever either parameter changes.)
-  @param cutoff range 0-255 represents 0-8191 Hz (AUDIO_RATE/2).
+  @param cutoff range 0-255 represents 0-8191 Hz (AUDIO_RATE/2) for LowPassFilter, range 0-65535 for LowPassFilter16
   Be careful of distortion at the lower end, especially with high resonance.
-  @param resonance range 0-255, 255 is most resonant.
+  @param resonance range 0-255 for LowPassFilter, 0-65535 for LowPassFilter16, 255/65535 is most resonant.
   */
   void setCutoffFreqAndResonance(su cutoff, su resonance)
 	{
