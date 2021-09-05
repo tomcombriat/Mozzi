@@ -56,7 +56,7 @@ public:
   Be careful of distortion at the lower end, especially with high resonance.
   */
   void setCutoffFreq(su cutoff)
-	{
+      {
     f = cutoff;
     fb = q + ucfxmul(q, SHIFTED_1 - cutoff);
   }
@@ -97,14 +97,13 @@ public:
     // setPin13High();
     buf0 += fxmul(((in - buf0) + fxmul(fb, buf0 - buf1)), f);
     buf1 += ifxmul(buf0 - buf1, f); // could overflow if input changes fast
-    // setPin13Low();
     return buf1;
   }
 
 private:
   su q;
   su f;
-  IntegerType<sizeof(AudioOutputStorage_t)>::unsigned_type fb;
+  typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type fb;
   AudioOutputStorage_t buf0, buf1;
   const uint8_t FX_SHIFT = sizeof(su) << 3;
   const su SHIFTED_1 = (1<<FX_SHIFT)-1;
@@ -126,7 +125,7 @@ private:
   inline typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(su)-1>::signed_type ifxmul(typename IntegerType<sizeof(AudioOutputStorage_t )+sizeof(su)-1>::signed_type a, su b) { return ((a * b) >> FX_SHIFT); } 
 
   // multiply two fixed point numbers (returns fixed point)
-  inline typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type fxmul(typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type a, AudioOutputStorage_t b) { return ((a * b) >> FX_SHIFT); }
+  inline typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type fxmul(typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type a, typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(su)-1>::signed_type b) { return ((a * b) >> FX_SHIFT); }
 };
 
 typedef LowPassFilterNbits<> LowPassFilter;
