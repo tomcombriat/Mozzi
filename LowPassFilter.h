@@ -48,6 +48,7 @@ fixed point version of the filter
 
 /** A resonant low pass filter for audio signals.
  */
+
 template<typename su=uint8_t>
 class LowPassFilterNbits
 {
