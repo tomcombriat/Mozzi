@@ -22,7 +22,7 @@
 
 #include "hardware_defines.h"
 
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
 // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
 #endif
@@ -154,12 +154,23 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define STANDARD_PLUS 1
 #define HIFI 2
 
+//enum audio_channels {MONO,STEREO,...};
+#define MONO 1
+#define STEREO 2
+
 #include "mozzi_config.h" // User can change the config file to set audio mode
 
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
 #error AUDIO_RATE 32768 does not work when AUDIO_MODE is STANDARD, try setting the AUDIO_MODE to STANDARD_PLUS in Mozzi/mozzi_config.h
 #endif
 
+#if (STEREO_HACK == true)
+#warning Use of STEREO_HACK is deprecated. Use AUDIO_CHANNELS STEREO, instead.
+#define AUDIO_CHANNELS STEREO
+#endif
+#if !defined(AUDIO_CHANNELS)
+#define AUDIO_CHANNELS MONO
+#endif
 
 #define CLOCK_TICKS_PER_AUDIO_TICK (F_CPU / AUDIO_RATE)
 
@@ -180,6 +191,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #if (EXTERNAL_AUDIO_OUTPUT != true)
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
+#elif IS_TEENSY4()
+#include "AudioConfigTeensy4.h"
 #elif IS_STM32()
 #include "AudioConfigSTM32.h"
 #elif IS_ESP8266()
@@ -188,6 +201,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigESP32.h"
 #elif IS_SAMD21()
 #include "AudioConfigSAMD21.h"
+#elif IS_RP2040()
+#include "AudioConfigRP2040.h"
 #elif IS_AVR() && (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"
 #elif IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
@@ -368,13 +383,5 @@ is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when 
 @todo  incorporate mozziMicros() in a more accurate EventDelay()?
 */
 unsigned long mozziMicros();
-
-
-
-
-// internal use
-#if (AUDIO_MODE == HIFI)
-static void setupTimer2();
-#endif
 
 #endif /* MOZZIGUTS_H_ */

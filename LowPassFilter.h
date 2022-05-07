@@ -16,9 +16,19 @@
 #include "IntegerType.h"
 #include "AudioOutput.h"
 
+
+
 /*
 simple resonant filter posted to musicdsp.org by Paul Kellett
 http://www.musicdsp.org/archive.php?classid=3#259
+
+Two versions are available: LowPassFilter and LowPassFilter16.
+LowPassFilter is an optimized version that uses 8bits values to set
+the resonance and the cutoff_freq. It can works on 8bits samples only
+on 8bits platforms.
+LowPassFilter16 consumes more CPU ressources but uses 16bits values
+for resonance and cutoff_freq and can work on samples up to 16bits on
+8bits platforms and up to 32 on 32bits platforms.
 
 // set feedback amount given f and q between 0 and 1
 fb = q + q/(1.0 - f);
@@ -38,7 +48,7 @@ fixed point version of the filter
 
 /** A resonant low pass filter for audio signals.
  */
-//template<typename su=uint8_t, typename ms=int, typename mu=unsigned int, typename ls1=int, typename ls2=long>
+
 template<typename su=uint8_t>
 class LowPassFilterNbits
 {
@@ -47,6 +57,7 @@ public:
   /** Constructor.
    */
   LowPassFilterNbits() { ; }
+
 
   /** deprecated.  Use setCutoffFreqAndResonance(su cutoff, su
   resonance).
@@ -87,7 +98,7 @@ public:
   }
 
   /** Calculate the next sample, given an input signal.
-  @param in the signal input.
+  @param in the signal input. Should not be more than 8bits on 8bits platforms (Arduino) if using LowPassFilter and not LowPassFilter16.
   @return the signal output.
   @note Timing: about 11us.
   */
@@ -135,6 +146,9 @@ typedef LowPassFilterNbits<uint16_t> LowPassFilter16;
 /**
 @example 10.Audio_Filters/LowPassFilter/LowPassFilter.ino
 This example demonstrates the LowPassFilter class.
+
+@example 10.Audio_Filters/LowPassFilter/LowPassFilter16.ino
+This example demonstrates the LowPassFilter16 class.
 */
 
 #endif /* LOWPASS_H_ */
