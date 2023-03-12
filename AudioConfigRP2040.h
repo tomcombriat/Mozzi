@@ -11,7 +11,7 @@
 #define EXTERNAL_DAC_VIA_I2S 2  // output via external DAC connected to I2S (PT8211 or similar)
 
 //******* BEGIN: These are the defines you may want to change. Best not to touch anything outside this range. ************/
-#define RP2040_AUDIO_OUT_MODE PWM_VIA_BARE_CHIP
+#define RP2040_AUDIO_OUT_MODE EXTERNAL_DAC_VIA_I2S
 //******* END: These are the defines you may want to change. Best not to touch anything outside this range. ************/
 
 
