@@ -45,10 +45,7 @@ jobs:
           - fqbn: arduino:samd:adafruit_circuitplayground_m0
             platforms: |
               - name: arduino:samd
-	  - fqbn: raspberry:pico:earlephilhower
-	    platforms: |
-	      - name: raspberry:pico
-	        source-url: https://github.com/earlephilhower/arduino-pico/blob/master/package.json
+
 
     steps:
       - name: Checkout repository
