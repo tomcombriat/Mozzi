@@ -49,7 +49,7 @@ jobs:
             type: RP2040
             platforms: |
               - name: raspberry:picco
-                source-url: github.com:earlephilhower/arduino-pico.git
+                source-url: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
 
     steps:
